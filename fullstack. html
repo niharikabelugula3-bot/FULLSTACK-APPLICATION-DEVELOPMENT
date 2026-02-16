@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Validation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Validation Form</h2>
+
+    <form id="studentForm" onsubmit="return validateForm()">
+        
+        <label>Full Name</label>
+        <input type="text" id="name" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Mobile Number</label>
+        <input type="text" id="mobile" maxlength="10" required>
+
+        <label>Age</label>
+        <input type="number" id="age" min="16" max="60" required>
+
+        <label>Course</label>
+        <select id="course" required>
+            <option value="">--Select Course--</option>
+            <option>BCA</option>
+            <option>BBA</option>
+            <option>B.Tech</option>
+            <option>MCA</option>
+        </select>
+
+        <div class="error" id="errorMsg"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let errorMsg = document.getElementById("errorMsg");
+
+    // Name validation (letters and spaces only)
+    let namePattern = /^[A-Za-z\s]+$/;
+    if (!namePattern.test(name)) {
+        errorMsg.textContent = "Name should contain only letters and spaces.";
+        return false;
+    }
+
+    // Mobile validation (10 digits only)
+    let mobilePattern = /^[0-9]{10}$/;
+    if (!mobilePattern.test(mobile)) {
+        errorMsg.textContent = "Mobile number must be exactly 10 digits.";
+        return false;
+    }
+
+    errorMsg.textContent = "";
+    alert("Form submitted successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>
